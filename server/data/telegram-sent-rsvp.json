@@ -286,5 +286,37 @@
       "message_id": null,
       "date": null
     }
+  },
+  {
+    "logged_at": "2026-07-12T15:37:37.629Z",
+    "payload": {
+      "name": "asdfghj",
+      "attendance": "yes",
+      "guests": 1,
+      "side": "groom",
+      "wishes": "kj",
+      "timestamp": "2026-07-12T15:37:37.609Z"
+    },
+    "telegram": {
+      "chat_id": "-1003760415846",
+      "message_id": null,
+      "date": null
+    }
+  },
+  {
+    "logged_at": "2026-07-12T15:39:05.064Z",
+    "payload": {
+      "name": "asdfghj",
+      "attendance": "yes",
+      "guests": 1,
+      "side": "groom",
+      "wishes": "kj",
+      "timestamp": "2026-07-12T15:38:45.436Z"
+    },
+    "telegram": {
+      "chat_id": "-1003760415846",
+      "message_id": null,
+      "date": null
+    }
   }
 ]

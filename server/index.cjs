@@ -369,12 +369,12 @@ function buildSummaryMarkdown(records, sourceLabel = "firestore") {
   const tableRows = safeRecords.map((p, index) => {
     const row = [
       String(index + 1),
-      (p.name || "").replace(/\|/g, "\\|"),
-      (p.attendance || "").replace(/\|/g, "\\|"),
-      (p.guests || "").replace(/\|/g, "\\|"),
-      (p.side || "").replace(/\|/g, "\\|"),
-      (p.wishes || "").replace(/\|/g, "\\|"),
-      (p.loggedAt || "").replace(/\|/g, "\\|"),
+      String(p.name || "").replace(/\|/g, "\\|"),
+      String(p.attendance || "").replace(/\|/g, "\\|"),
+      String(p.guests !== undefined && p.guests !== null ? p.guests : "").replace(/\|/g, "\\|"),
+      String(p.side || "").replace(/\|/g, "\\|"),
+      String(p.wishes || "").replace(/\|/g, "\\|"),
+      String(p.loggedAt || "").replace(/\|/g, "\\|"),
     ];
     return `| ${row.join(" | ")} |`;
   });
