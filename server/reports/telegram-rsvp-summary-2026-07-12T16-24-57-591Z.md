@@ -1,15 +1,17 @@
 # Telegram RSVP Summary
 
-- Generated at: 2026-06-07T19:06:49.560Z
-- Data source: firestore
+- Generated at: 2026-07-12T16:24:57.522Z
+- Data source: local-log-fallback
 - Total RSVP records: 0
 - Total guests declared: 0
+- All guests (boy guests + girl guests): 0 (boy) + 0 (girl) = 0
 
 ## Attendance Breakdown
 - No data
 
 ## Side Breakdown
-- No data
+- Հարսի: 0
+- Փեսայի: 0
 
 ## RSVP Messages
 
