@@ -11,7 +11,6 @@ import RSVP from './components/RSVP';
 import Footer from './components/Footer';
 import Postcard from './components/Postcard';
 import FadeInSection from './components/FadeInSection';
-import MusicPlayer from './components/MusicPlayer';
 import Divider from './components/Divider';
 import LanguageSelector from './components/LanguageSelector';
 import { LanguageProvider } from './LanguageContext';
@@ -65,7 +64,11 @@ const AppContent: React.FC = () => {
   return (
     <>
       <LanguageSelector />
-      {!isOpened && <Postcard onOpen={() => setIsOpened(true)} />}
+      {!isOpened && (
+        <Postcard 
+          onOpen={() => setIsOpened(true)} 
+        />
+      )}
       
       <div className={`relative min-h-screen bg-wedding-bg font-serif text-wedding-text selection:bg-wedding-accent selection:text-white transition-all duration-1000 ease-in-out ${isOpened ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 h-screen overflow-hidden pointer-events-none'}`}>
         
@@ -120,9 +123,6 @@ const AppContent: React.FC = () => {
           </FadeInSection>
         </div>
       </div>
-
-      {/* Music Player appears and autoplays after the postcard is opened */}
-      {isOpened && <MusicPlayer isPlaying={true} />}
     </>
   );
 };

@@ -1,6 +1,9 @@
 {
   "name": "",
-  "workspaces": ["frontend", "backend"], 
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
     "dev-frontend": "npm run dev --prefix frontend",
     "dev-backend": "npm run dev --prefix backend",
@@ -8,5 +11,8 @@
   },
   "devDependencies": {
     "concurrently": "latest"
+  },
+  "dependencies": {
+    "@rolldown/binding-win32-x64-msvc": "^1.1.5"
   }
 }
