@@ -179,13 +179,25 @@ async function readRsvpsFromFirestore(limit = 2000) {
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 }
 
+function translateAttendance(val) {
+  if (val === "yes") return "Սիրով կգամ";
+  if (val === "no") return "Չեմ կարող";
+  return val || "նշված չէ";
+}
+
+function translateSide(val) {
+  if (val === "bride") return "Հարսի";
+  if (val === "groom") return "Փեսայի";
+  return val || "նշված չէ";
+}
+
 function formatRsvpSummary(data) {
   return [
     "Նոր RSVP",
     `Անուն: ${data.name || ""}`,
-    `Մասնակցություն: ${data.attendance || ""}`,
+    `Մասնակցություն: ${translateAttendance(data.attendance)}`,
     `Հյուրեր: ${data.guests || ""}`,
-    `Պատկանում է: ${data.side || ""}`,
+    `Պատկանում է: ${translateSide(data.side)}`,
     `Մաղթանքներ: ${data.wishes || ""}`,
     `Ժամանակ: ${data.timestamp || new Date().toISOString()}`,
   ].join("\n");
@@ -289,9 +301,9 @@ function extractSummaryRecord(item) {
   const payload = item?.payload || item || {};
   return {
     name: payload.name || "",
-    attendance: payload.attendance || "",
+    attendance: translateAttendance(payload.attendance),
     guests: payload.guests || "",
-    side: payload.side || "",
+    side: translateSide(payload.side),
     wishes: payload.wishes || "",
     loggedAt: item?.logged_at || item?.createdAtIso || payload.timestamp || "",
   };
