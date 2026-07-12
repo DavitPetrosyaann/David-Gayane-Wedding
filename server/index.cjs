@@ -326,15 +326,21 @@ function buildSummaryMarkdown(records, sourceLabel = "firestore") {
   }, {});
 
   const sideCounts = safeRecords.reduce((acc, item) => {
-    const key = (item?.side || "նշված չէ").trim() || "նշված չէ";
-    const rawGuests = String(item?.guests || "").trim();
-    const parsedGuests = Number.parseInt(rawGuests, 10);
-    const guestCount = Number.isFinite(parsedGuests) ? parsedGuests : 0;
-    acc[key] = (acc[key] || 0) + guestCount;
+    if (item?.attendance !== "Սիրով կգամ") return acc;
+
+    const key = (item?.side || "").trim();
+    if (key === "Հարսի" || key === "Փեսայի") {
+      const rawGuests = String(item?.guests || "").trim();
+      const parsedGuests = Number.parseInt(rawGuests, 10);
+      const guestCount = Number.isFinite(parsedGuests) ? parsedGuests : 0;
+      acc[key] = (acc[key] || 0) + guestCount;
+    }
     return acc;
-  }, {});
+  }, { "Հարսի": 0, "Փեսայի": 0 });
 
   const totalGuests = safeRecords.reduce((sum, item) => {
+    if (item?.attendance !== "Սիրով կգամ") return sum;
+
     const raw = String(item?.guests || "").trim();
     const parsed = Number.parseInt(raw, 10);
     return sum + (Number.isFinite(parsed) ? parsed : 0);
