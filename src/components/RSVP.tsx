@@ -3,7 +3,6 @@ import confetti from 'canvas-confetti';
 import { RSVPFormData } from '../types';
 import { useLanguage } from '../LanguageContext';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { firestore } from '../lib/firebaseClient';
 
 const RSVP: React.FC = () => {
   const { t } = useLanguage();
@@ -116,6 +115,7 @@ const RSVP: React.FC = () => {
       const hasFirebaseConfig = Boolean(import.meta.env.VITE_FIREBASE_PROJECT_ID);
       if (hasFirebaseConfig) {
         try {
+          const { firestore } = await import('../lib/firebaseClient');
           await addDoc(
             collection(
               firestore,

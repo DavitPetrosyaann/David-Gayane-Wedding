@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Noto Serif Armenian", serif;
+
+  --color-wedding-bg: #F9F8F4;
+  --color-wedding-text: #333333;
+  --color-wedding-accent: #8B9A85;
+  --color-wedding-light: #EAE7E0;
+  --color-wedding-gold: #D4AF37;
+
+  --animate-gradient-x: gradient-x 4s ease infinite;
+  --animate-ring-left: ring-left 3s ease-in-out infinite;
+  --animate-ring-right: ring-right 3s ease-in-out infinite;
+  --animate-sparkle: sparkle 3s ease-in-out infinite;
+  --animate-sparkle-wave: sparkle-wave 3s ease-out infinite;
+  --animate-glass-left: glass-left 3s ease-in-out infinite;
+  --animate-glass-right: glass-right 3s ease-in-out infinite;
+  --animate-bubble-1: bubble 2s ease-in infinite 0.2s;
+  --animate-bubble-2: bubble 2.5s ease-in-out infinite 0.7s;
+  --animate-bubble-3: bubble 2.2s ease-in-out infinite 1.2s;
+  --animate-splash-1: splash-1 3s ease-out infinite;
+  --animate-splash-2: splash-2 3s ease-out infinite;
+  --animate-bg-pan: bg-pan 15s ease infinite;
+  --animate-float-up: float-up 15s linear infinite;
+  --animate-heartbeat: heartbeat 1.5s ease-in-out infinite;
+  --animate-ken-burns: ken-burns 20s ease-out infinite alternate;
+  --animate-float-particle: float-particle 15s linear infinite;
+
+  @keyframes gradient-x {
+    0%, 100% { background-size: 200% 200%; background-position: left center; }
+    50% { background-size: 200% 200%; background-position: right center; }
+  }
+  @keyframes ring-left {
+    0%, 100% { transform: translateX(-6px); }
+    50% { transform: translateX(3px); }
+  }
+  @keyframes ring-right {
+    0%, 100% { transform: translateX(6px); }
+    50% { transform: translateX(-3px); }
+  }
+  @keyframes sparkle {
+    0%, 35%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(90deg); opacity: 1; }
+    65% { transform: scale(0) rotate(180deg); opacity: 0; }
+  }
+  @keyframes sparkle-wave {
+    0%, 35%, 100% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.5); opacity: 1; }
+    65% { transform: scale(2.5); opacity: 0; }
+  }
+  @keyframes glass-left {
+    0%, 100% { transform: rotate(0deg) translateX(0); }
+    50% { transform: rotate(12deg) translateX(2px); }
+  }
+  @keyframes glass-right {
+    0%, 100% { transform: rotate(0deg) translateX(0); }
+    50% { transform: rotate(-12deg) translateX(-2px); }
+  }
+  @keyframes bubble {
+    0% { transform: translateY(0) scale(0); opacity: 0; }
+    20% { transform: translateY(-4px) scale(1); opacity: 1; }
+    80% { transform: translateY(-16px) scale(1); opacity: 1; }
+    100% { transform: translateY(-20px) scale(0); opacity: 0; }
+  }
+  @keyframes splash-1 {
+    0%, 45%, 100% { transform: translate(0, 0) scale(0); opacity: 0; }
+    50% { transform: translate(-6px, -10px) scale(1); opacity: 1; }
+    60% { transform: translate(-8px, -2px) scale(0); opacity: 0; }
+  }
+  @keyframes splash-2 {
+    0%, 45%, 100% { transform: translate(0, 0) scale(0); opacity: 0; }
+    50% { transform: translate(6px, -12px) scale(1); opacity: 1; }
+    60% { transform: translate(8px, -4px) scale(0); opacity: 0; }
+  }
+  @keyframes bg-pan {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes float-up {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+  }
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    10% { transform: scale(1.15); }
+    20% { transform: scale(1); }
+    30% { transform: scale(1.15); }
+    40% { transform: scale(1); }
+  }
+  @keyframes ken-burns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+  }
+  @keyframes float-particle {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(-100px) scale(0); opacity: 0; }
+  }
+}

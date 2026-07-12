@@ -1,0 +1,38 @@
+name: Build project on main push
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout David-Gayane-Wedding
+        uses: actions/checkout@v4
+
+      - name: Checkout PreZento.am-project-generator
+        uses: actions/checkout@v4
+        with:
+          repository: DavitPetrosyaann/PreZento.am-project-generator
+          path: parent
+
+      - name: Copy modules_&_packages to relative path
+        run: |
+          mkdir -p ../../modules_\&_packages
+          cp -r parent/modules_\&_packages/* ../../modules_\&_packages/
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build production assets
+        run: npm run build
