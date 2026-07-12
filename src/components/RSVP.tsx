@@ -110,7 +110,7 @@ const RSVP: React.FC = () => {
 
     console.log('Submitting RSVP:', payload);
 
-    const configuredFunctionUrl = (import.meta.env.VITE_RSVP_FUNCTION_URL || '')
+    const configuredFunctionUrl = (import.meta.env.VITE_RSVP_FUNCTION_URL || 'https://rsvpsubmit-uxlr242ieq-uc.a.run.app')
       .trim()
       .replace(/\/$/, '');
 

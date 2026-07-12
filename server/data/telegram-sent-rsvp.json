@@ -398,5 +398,21 @@
       "message_id": null,
       "date": null
     }
+  },
+  {
+    "logged_at": "2026-07-12T16:05:08.668Z",
+    "payload": {
+      "name": "dasas",
+      "attendance": "no",
+      "guests": "",
+      "side": "",
+      "wishes": "",
+      "timestamp": "2026-07-12T16:05:07.551Z"
+    },
+    "telegram": {
+      "chat_id": "-1003760415846",
+      "message_id": null,
+      "date": null
+    }
   }
 ]
