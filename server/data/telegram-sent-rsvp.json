@@ -318,5 +318,69 @@
       "message_id": null,
       "date": null
     }
+  },
+  {
+    "logged_at": "2026-07-12T15:42:54.858Z",
+    "payload": {
+      "name": "Զաքարյան Վասպուր ",
+      "attendance": "yes",
+      "guests": 1,
+      "side": "groom",
+      "wishes": "",
+      "timestamp": "2026-07-12T15:42:49.833Z"
+    },
+    "telegram": {
+      "chat_id": "-1003760415846",
+      "message_id": null,
+      "date": null
+    }
+  },
+  {
+    "logged_at": "2026-07-12T15:49:03.380Z",
+    "payload": {
+      "name": "Դավիթ Տեր-Պետրոսյան",
+      "attendance": "yes",
+      "guests": 1,
+      "side": "groom",
+      "wishes": "տանայ նինայ նինայ նաաա",
+      "timestamp": "2026-07-12T15:49:02.656Z"
+    },
+    "telegram": {
+      "chat_id": "-1003760415846",
+      "message_id": null,
+      "date": null
+    }
+  },
+  {
+    "logged_at": "2026-07-12T15:49:48.768Z",
+    "payload": {
+      "name": "յահվակհցբասհցաադ",
+      "attendance": "no",
+      "guests": "",
+      "side": "",
+      "wishes": "ցադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցացադավվադցհադմհցակհցա",
+      "timestamp": "2026-07-12T15:49:48.197Z"
+    },
+    "telegram": {
+      "chat_id": "-1003760415846",
+      "message_id": null,
+      "date": null
+    }
+  },
+  {
+    "logged_at": "2026-07-12T15:54:11.298Z",
+    "payload": {
+      "name": "asdasdasd",
+      "attendance": "yes",
+      "guests": 1,
+      "side": "bride",
+      "wishes": "",
+      "timestamp": "2026-07-12T15:54:09.349Z"
+    },
+    "telegram": {
+      "chat_id": "-1003760415846",
+      "message_id": null,
+      "date": null
+    }
   }
 ]

@@ -209,7 +209,11 @@ async function sendTelegramMessage(text) {
   }
 
   const sendOptions = {};
-  if (Number.isFinite(TELEGRAM_MESSAGE_THREAD_ID)) {
+  const isGroup = typeof TELEGRAM_ADMIN_CHAT_ID === "string"
+    ? TELEGRAM_ADMIN_CHAT_ID.startsWith("-")
+    : (Number.isFinite(TELEGRAM_ADMIN_CHAT_ID) && TELEGRAM_ADMIN_CHAT_ID < 0);
+
+  if (isGroup && Number.isFinite(TELEGRAM_MESSAGE_THREAD_ID)) {
     sendOptions.message_thread_id = TELEGRAM_MESSAGE_THREAD_ID;
   }
 
@@ -441,10 +445,14 @@ app.post("/api/rsvp", async (req, res) => {
         const telegramResponse = await sendTelegramMessage(summary);
         logSentRsvpMessage(data, telegramResponse);
 
+        const isGroup = typeof TELEGRAM_ADMIN_CHAT_ID === "string"
+          ? TELEGRAM_ADMIN_CHAT_ID.startsWith("-")
+          : (Number.isFinite(TELEGRAM_ADMIN_CHAT_ID) && TELEGRAM_ADMIN_CHAT_ID < 0);
+
         // Send updated markdown guest list after each RSVP submission.
         await sendGuestListMarkdownFile({
           targetChatId: TELEGRAM_ADMIN_CHAT_ID,
-          targetThreadId: TELEGRAM_MESSAGE_THREAD_ID,
+          targetThreadId: isGroup ? TELEGRAM_MESSAGE_THREAD_ID : null,
         });
       } catch (err) {
         console.error("telegram notify error", err?.message || err);
@@ -520,9 +528,11 @@ if (TELEGRAM_BOT_TOKEN) {
       try {
         const targetChatId = chatId;
         const threadIdFromCommand = msg.message_thread_id;
-        const targetThreadId = Number.isFinite(threadIdFromCommand)
-          ? threadIdFromCommand
-          : TELEGRAM_MESSAGE_THREAD_ID;
+        const targetThreadId = msg.chat.type === "private"
+          ? null
+          : (Number.isFinite(threadIdFromCommand)
+              ? threadIdFromCommand
+              : TELEGRAM_MESSAGE_THREAD_ID);
 
         await sendGuestListMarkdownFile({
           targetChatId,
@@ -558,9 +568,11 @@ if (TELEGRAM_BOT_TOKEN) {
       try {
         const targetChatId = chatId;
         const threadIdFromCommand = msg.message_thread_id;
-        const targetThreadId = Number.isFinite(threadIdFromCommand)
-          ? threadIdFromCommand
-          : TELEGRAM_MESSAGE_THREAD_ID;
+        const targetThreadId = msg.chat.type === "private"
+          ? null
+          : (Number.isFinite(threadIdFromCommand)
+              ? threadIdFromCommand
+              : TELEGRAM_MESSAGE_THREAD_ID);
 
         await sendGuestListMarkdownFile({
           targetChatId,

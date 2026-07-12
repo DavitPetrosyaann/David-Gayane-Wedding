@@ -82,6 +82,23 @@ const RSVP: React.FC = () => {
     setIsSubmitting(true);
     setSubmitError(null);
 
+    // Form field validation
+    if (!formData.name.trim()) {
+      setSubmitError('Please enter your name.');
+      setIsSubmitting(false);
+      return;
+    }
+    if (!formData.attendance) {
+      setSubmitError('Please select whether you will attend.');
+      setIsSubmitting(false);
+      return;
+    }
+    if (formData.attendance === 'yes' && !formData.side) {
+      setSubmitError('Please select whose guest you are.');
+      setIsSubmitting(false);
+      return;
+    }
+
     const payload = {
       name: formData.name,
       attendance: formData.attendance,
@@ -260,6 +277,7 @@ const RSVP: React.FC = () => {
                   type="radio"
                   name="attendance"
                   value="no"
+                  required
                   checked={formData.attendance === 'no'}
                   onChange={handleChange}
                   className="accent-wedding-accent w-4 h-4 focus:ring-wedding-accent"
@@ -307,6 +325,7 @@ const RSVP: React.FC = () => {
                       type="radio"
                       name="side"
                       value="groom"
+                      required
                       checked={formData.side === 'groom'}
                       onChange={handleChange}
                       className="accent-wedding-accent w-4 h-4 focus:ring-wedding-accent"
