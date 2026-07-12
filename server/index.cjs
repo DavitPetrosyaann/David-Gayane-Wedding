@@ -346,6 +346,10 @@ function buildSummaryMarkdown(records, sourceLabel = "firestore") {
     return sum + (Number.isFinite(parsed) ? parsed : 0);
   }, 0);
 
+  const boyGuests = sideCounts["Փեսայի"] || 0;
+  const girlGuests = sideCounts["Հարսի"] || 0;
+  const sumGuests = boyGuests + girlGuests;
+
   const header = [
     "# Telegram RSVP Summary",
     "",
@@ -353,6 +357,7 @@ function buildSummaryMarkdown(records, sourceLabel = "firestore") {
     `- Data source: ${sourceLabel}`,
     `- Total RSVP records: ${total}`,
     `- Total guests declared: ${totalGuests}`,
+    `- All guests (boy guests + girl guests): ${boyGuests} (boy) + ${girlGuests} (girl) = ${sumGuests}`,
     "",
     "## Attendance Breakdown",
   ];

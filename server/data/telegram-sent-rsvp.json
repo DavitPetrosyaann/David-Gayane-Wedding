@@ -382,5 +382,21 @@
       "message_id": null,
       "date": null
     }
+  },
+  {
+    "logged_at": "2026-07-12T15:58:41.409Z",
+    "payload": {
+      "name": "Զաքարյան Վասպուր ",
+      "attendance": "no",
+      "guests": "",
+      "side": "",
+      "wishes": "",
+      "timestamp": "2026-07-12T15:57:37.050Z"
+    },
+    "telegram": {
+      "chat_id": "-1003760415846",
+      "message_id": null,
+      "date": null
+    }
   }
 ]
