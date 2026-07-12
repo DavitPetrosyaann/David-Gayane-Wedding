@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 const PORT = process.env.SERVER_PORT || 5200;
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "8718024545:AAELfIv8wn-F0DZsRvi7dIafb8RWzKl6UI0";
 const RSVP_PROJECT_ID = process.env.RSVP_PROJECT_ID || "david-gayane-wedding";
 const FIRESTORE_RSVP_COLLECTION =
   process.env.FIRESTORE_RSVP_COLLECTION || "projects";
@@ -529,6 +529,43 @@ if (TELEGRAM_BOT_TOKEN) {
           );
         } catch (e) {
           logTelegramError("start_command_notify_failure", e, {
+            chatId,
+          });
+        }
+      }
+    });
+ 
+    telegramBot.onText(/^\/rsvp(?:@\w+)?$/i, async (msg) => {
+      const chatId = msg.chat.id;
+      console.log("telegram /rsvp summary command received", {
+        chatId,
+        threadId: msg?.message_thread_id || null,
+        fromId: msg?.from?.id || null,
+      });
+
+      try {
+        const targetChatId = chatId;
+        const threadIdFromCommand = msg.message_thread_id;
+        const targetThreadId = Number.isFinite(threadIdFromCommand)
+          ? threadIdFromCommand
+          : TELEGRAM_MESSAGE_THREAD_ID;
+
+        await sendGuestListMarkdownFile({
+          targetChatId,
+          targetThreadId,
+        });
+      } catch (err) {
+        logTelegramError("rsvp_summary_command", err, {
+          chatId,
+          threadId: msg?.message_thread_id || null,
+        });
+        try {
+          await telegramBot.sendMessage(
+            chatId,
+            `Failed to send guest-list markdown file.\n${err?.message || String(err)}`,
+          );
+        } catch (e) {
+          logTelegramError("rsvp_summary_notify_failure", e, {
             chatId,
           });
         }
