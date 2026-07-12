@@ -93,56 +93,88 @@ const RSVP: React.FC = () => {
 
     console.log('Submitting RSVP:', payload);
 
-    try {
-      const response = await fetch('/api/rsvp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+    const configuredFunctionUrl = (import.meta.env.VITE_RSVP_FUNCTION_URL || '')
+      .trim()
+      .replace(/\/$/, '');
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        triggerFireworks();
-        return;
-      }
+    const configuredBase = (import.meta.env.VITE_RSVP_API_BASE || '')
+      .trim()
+      .replace(/\/$/, '');
 
-      throw new Error(`API submission failed: ${response.status}`);
-    } catch (apiError) {
-      console.warn('API submission failed, attempting direct Firestore fallback...', apiError);
+    const allowRelativeApi =
+      ['localhost', '127.0.0.1'].includes(window.location.hostname) ||
+      import.meta.env.VITE_ENABLE_RELATIVE_RSVP_API === 'true';
 
-      const hasFirebaseConfig = Boolean(import.meta.env.VITE_FIREBASE_PROJECT_ID);
-      if (hasFirebaseConfig) {
-        try {
-          const { firestore } = await import('../lib/firebaseClient');
-          await addDoc(
-            collection(
-              firestore,
-              import.meta.env.VITE_FIRESTORE_RSVP_COLLECTION || 'projects',
-              import.meta.env.VITE_RSVP_PROJECT_ID || 'david-gayane-wedding',
-              'rsvps'
-            ),
-            {
-              ...payload,
-              createdAtIso: new Date().toISOString(),
-              createdAt: serverTimestamp(),
-              source: 'client_firestore_fallback',
-            }
-          );
+    const endpointCandidates = [
+      configuredFunctionUrl,
+      configuredBase ? `${configuredBase}/api/rsvp` : '',
+      allowRelativeApi ? '/api/rsvp' : '',
+    ].filter(Boolean);
+
+    const uniqueEndpoints = [...new Set(endpointCandidates)];
+
+    let lastError: any = null;
+    let submitted = false;
+
+    for (const endpoint of uniqueEndpoints) {
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (response.ok) {
           setIsSubmitted(true);
           triggerFireworks();
-          return;
-        } catch (firestoreError) {
-          console.error('Firestore fallback write failed:', firestoreError);
-          setSubmitError('Failed to submit RSVP. Please try again.');
+          submitted = true;
+          break;
         }
-      } else {
-        setSubmitError('Failed to submit RSVP. Connection error.');
+
+        lastError = new Error(`API submission failed: ${response.status} via ${endpoint}`);
+      } catch (err) {
+        lastError = err;
       }
-    } finally {
-      setIsSubmitting(false);
     }
+
+    if (submitted) {
+      setIsSubmitting(false);
+      return;
+    }
+
+    console.warn('API submission failed, attempting direct Firestore fallback...', lastError);
+
+    const hasFirebaseConfig = Boolean(import.meta.env.VITE_FIREBASE_PROJECT_ID);
+    if (hasFirebaseConfig) {
+      try {
+        const { firestore } = await import('../lib/firebaseClient');
+        await addDoc(
+          collection(
+            firestore,
+            import.meta.env.VITE_FIRESTORE_RSVP_COLLECTION || 'projects',
+            import.meta.env.VITE_RSVP_PROJECT_ID || 'david-gayane-wedding',
+            'rsvps'
+          ),
+          {
+            ...payload,
+            createdAtIso: new Date().toISOString(),
+            createdAt: serverTimestamp(),
+            source: 'client_firestore_fallback',
+          }
+        );
+        setIsSubmitted(true);
+        triggerFireworks();
+      } catch (firestoreError) {
+        console.error('Firestore fallback write failed:', firestoreError);
+        setSubmitError('Failed to submit RSVP. Please try again.');
+      }
+    } else {
+      setSubmitError('Failed to submit RSVP. Connection error.');
+    }
+
+    setIsSubmitting(false);
   };
 
   if (isSubmitted) {
