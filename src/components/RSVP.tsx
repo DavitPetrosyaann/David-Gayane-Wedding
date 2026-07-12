@@ -101,6 +101,7 @@ const RSVP: React.FC = () => {
 
     const payload = {
       projectId: import.meta.env.VITE_RSVP_PROJECT_ID || 'david-gayane-wedding',
+      collection: import.meta.env.VITE_FIRESTORE_RSVP_COLLECTION || 'projects_data',
       name: formData.name,
       attendance: formData.attendance,
       guests: formData.attendance === 'yes' ? (formData.guests === '' ? 1 : formData.guests) : 0,
@@ -171,7 +172,7 @@ const RSVP: React.FC = () => {
         await addDoc(
           collection(
             firestore,
-            import.meta.env.VITE_FIRESTORE_RSVP_COLLECTION || 'projects',
+            import.meta.env.VITE_FIRESTORE_RSVP_COLLECTION || 'projects_data',
             import.meta.env.VITE_RSVP_PROJECT_ID || 'david-gayane-wedding',
             'rsvps'
           ),

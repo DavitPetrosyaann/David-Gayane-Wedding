@@ -29,7 +29,7 @@ const PORT = process.env.SERVER_PORT || 5200;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "8718024545:AAELfIv8wn-F0DZsRvi7dIafb8RWzKl6UI0";
 const RSVP_PROJECT_ID = process.env.RSVP_PROJECT_ID || "david-gayane-wedding";
 const FIRESTORE_RSVP_COLLECTION =
-  process.env.FIRESTORE_RSVP_COLLECTION || "projects";
+  process.env.FIRESTORE_RSVP_COLLECTION || "projects_data";
 let telegramBot = null;
 let firestoreDb = null;
 
