@@ -100,6 +100,7 @@ const RSVP: React.FC = () => {
     }
 
     const payload = {
+      projectId: import.meta.env.VITE_RSVP_PROJECT_ID || 'david-gayane-wedding',
       name: formData.name,
       attendance: formData.attendance,
       guests: formData.attendance === 'yes' ? (formData.guests === '' ? 1 : formData.guests) : 0,
@@ -110,7 +111,7 @@ const RSVP: React.FC = () => {
 
     console.log('Submitting RSVP:', payload);
 
-    const configuredFunctionUrl = (import.meta.env.VITE_RSVP_FUNCTION_URL || '')
+    const configuredFunctionUrl = (import.meta.env.VITE_RSVP_FUNCTION_URL || 'https://rsvpsubmit-uxlr242ieq-uc.a.run.app')
       .trim()
       .replace(/\/$/, '');
 
