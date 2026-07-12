@@ -41,7 +41,7 @@ export const translations = {
     thankYouText: "Ձեր պատասխանը գրանցված է:",
     footerText: "Սիրով կսպասենք Ձեզ",
     clickToOpen: "ՍԵՂՄԵՔ ԲԱՑԵԼՈՒ ՀԱՄԱՐ",
-    names: "Դավիթ և Գայանե",
+    names: "Դավիդ և Գայանե",
     month: "Սեպտեմբեր"
   },
   en: {

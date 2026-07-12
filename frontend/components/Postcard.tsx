@@ -58,8 +58,14 @@ const Postcard: React.FC<PostcardProps> = ({ onOpen }) => {
   return (
     <div className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden transition-opacity duration-1000 ease-in-out ${step === 4 ? 'opacity-0' : 'opacity-100'}`}>
       
-      {/* Animated Gradient Background Layer */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#F9F8F4] via-[#EAE7E0] to-[#e0e5de] bg-[length:200%_200%] animate-bg-pan"></div>
+      {/* Background Image Layer */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: 'url("/picture/Background_photo_for_post_card.jpg")',
+          filter: 'brightness(0.7) sepia(0.1)'
+        }}
+      />
 
       {/* Floating Bokeh Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -121,7 +127,7 @@ const Postcard: React.FC<PostcardProps> = ({ onOpen }) => {
           ))}
           
           {step === 0 && (
-            <div className="absolute -bottom-16 left-0 right-0 text-center text-gray-600 tracking-widest text-sm animate-pulse font-medium drop-shadow-sm">
+            <div className="absolute -bottom-16 left-0 right-0 text-center text-white tracking-widest text-sm animate-pulse font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.7)]">
               {t.clickToOpen}
             </div>
           )}

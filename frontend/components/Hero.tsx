@@ -10,8 +10,8 @@ const Hero: React.FC = () => {
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat animate-ken-burns"
         style={{ 
-          backgroundImage: 'url("https://picsum.photos/1200/1600?grayscale")',
-          filter: 'brightness(0.6) sepia(0.2)'
+          backgroundImage: 'url("/picture/1.jpg")',
+          filter: 'brightness(0.65) sepia(0.1)'
         }}
       />
       
