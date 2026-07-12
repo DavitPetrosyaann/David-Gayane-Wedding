@@ -270,5 +270,21 @@
       "message_id": null,
       "date": null
     }
+  },
+  {
+    "logged_at": "2026-07-12T15:22:17.828Z",
+    "payload": {
+      "name": "Test Guest",
+      "attendance": "yes",
+      "guests": 2,
+      "side": "bride",
+      "wishes": "Congrats!",
+      "timestamp": "2026-07-12T15:22:17.815Z"
+    },
+    "telegram": {
+      "chat_id": "-1003760415846",
+      "message_id": null,
+      "date": null
+    }
   }
 ]
